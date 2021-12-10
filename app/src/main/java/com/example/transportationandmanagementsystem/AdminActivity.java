@@ -20,7 +20,7 @@ public class AdminActivity extends AppCompatActivity {
     Button button;
     EditText inputText;
 
-
+    FirebaseDatabase db;
     DatabaseReference mRef;
 
 
@@ -38,6 +38,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 insertBus();
+
             }
         });
 
@@ -48,6 +49,8 @@ public class AdminActivity extends AppCompatActivity {
 
         String name = inputText.getText().toString();
         if (!name.equals("")) {
+            db = FirebaseDatabase.getInstance();
+            mRef = db.getReference("buses");
             Buses buses = new Buses(name);
             mRef.push().setValue(buses);
             Toast.makeText(AdminActivity.this, "PUSHED " + name, Toast.LENGTH_LONG).show();

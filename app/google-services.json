@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "668903305506",
-    "project_id": "transportation-system-6793c",
-    "storage_bucket": "transportation-system-6793c.appspot.com"
+    "project_number": "46706316223",
+    "project_id": "transportation-system-9f8e1",
+    "storage_bucket": "transportation-system-9f8e1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668903305506:android:a411e199d16d5c123e757b",
+        "mobilesdk_app_id": "1:46706316223:android:aacb8f1b157e19d892470a",
         "android_client_info": {
           "package_name": "com.example.transportationandmanagementsystem"
         }
       },
       "oauth_client": [
         {
-          "client_id": "668903305506-qgk69baka40g3hf2uht9un4mtbi6gq0f.apps.googleusercontent.com",
+          "client_id": "46706316223-ld0gl6qhc68oh5npg0jebf2b90k61okd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDxRNLz_39spMYkRGwz4FWX-SPo-jzfFKw"
+          "current_key": "AIzaSyBFPyvg0IDpVWpfODipf8WZ2tZ9aFalqEk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "668903305506-qgk69baka40g3hf2uht9un4mtbi6gq0f.apps.googleusercontent.com",
+              "client_id": "46706316223-ld0gl6qhc68oh5npg0jebf2b90k61okd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
