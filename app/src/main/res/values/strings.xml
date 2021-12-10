@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Transportation and management system</string>
+    <string-array name="route">
+        <item>Main Campus</item>
+        <item>Daffodil Smart City</item>
+
+    </string-array>
+
 </resources>

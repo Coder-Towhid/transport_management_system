@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,18 +9,62 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/inputText"
+        android:id="@+id/BusName"
         android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Bus Name"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/BusSchedule"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Bus Schedule"
+        app:layout_constraintEnd_toEndOf="@+id/BusName"
+        app:layout_constraintStart_toStartOf="@+id/BusName"
+        app:layout_constraintTop_toBottomOf="@+id/BusName" />
+
+
+
+    <EditText
+        android:id="@+id/BusSeats"
+        android:layout_width="369dp"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="34dp"
         android:ems="10"
-        android:hint="Bus type"
-        android:inputType="textPersonName" />
+        android:hint="Bus Seats"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/BusSchedule"
+        app:layout_constraintStart_toStartOf="@+id/BusSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/BusSchedule" />
+
+    <TextView
+        android:id="@+id/BusRoute"
+        android:layout_width="369dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Bus Route"
+        app:layout_constraintEnd_toEndOf="@+id/BusSeats"
+        app:layout_constraintStart_toStartOf="@+id/BusSeats"
+        app:layout_constraintTop_toBottomOf="@+id/BusSeats" />
+
+    <Spinner
+        android:id="@+id/route"
+        android:layout_width="369dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/BusRoute"
+        app:layout_constraintStart_toStartOf="@+id/BusRoute"
+        app:layout_constraintTop_toBottomOf="@+id/BusRoute" />
 
     <Button
         android:id="@+id/addButton"
@@ -28,8 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        android:text="ADD BUS" />
+        android:text="ADD BUS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

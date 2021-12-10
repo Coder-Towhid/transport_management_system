@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -16,10 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button button;
-    EditText inputText;
-
+    EditText busname,busseats,schedule;
+    Spinner  route;
+    String  rt;
     FirebaseDatabase db;
     DatabaseReference mRef;
 
@@ -29,7 +32,17 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         button = findViewById(R.id.addButton);
-        inputText = findViewById(R.id.inputText);
+        busname = findViewById(R.id.BusName);
+        schedule =  findViewById(R.id.BusSchedule);
+        busseats = findViewById(R.id.BusSeats);
+        route = findViewById(R.id.route);
+
+
+        ArrayAdapter<CharSequence> ad = ArrayAdapter.createFromResource(this, R.array.route, android.R.layout.simple_spinner_item);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        route.setAdapter(ad);
+        route.setOnItemSelectedListener(this);
+
 
 
         mRef = FirebaseDatabase.getInstance().getReference("BUSES");
@@ -47,15 +60,33 @@ public class AdminActivity extends AppCompatActivity {
 
     private void insertBus() {
 
-        String name = inputText.getText().toString();
-        if (!name.equals("")) {
+        String name = busname.getText().toString();
+        String sdl = schedule.getText().toString();
+        String seats = busseats.getText().toString();
+
+
+        if (!name.equals("") && !seats.equals("")) {
             db = FirebaseDatabase.getInstance();
             mRef = db.getReference("buses");
-            Buses buses = new Buses(name);
+            Buses buses = new Buses(name, sdl, seats, rt);
             mRef.push().setValue(buses);
-            Toast.makeText(AdminActivity.this, "PUSHED " + name, Toast.LENGTH_LONG).show();
-            inputText.setText("");
+
+            busname.setText("");
+            schedule.setText("");
+            busseats.setText("");
+
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+         rt =  parent.getItemAtPosition(position).toString();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
