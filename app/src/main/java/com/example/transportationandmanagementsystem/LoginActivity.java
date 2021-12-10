@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = inputPassword.getEditText().getText().toString();
 
 
-        if(email.isEmpty() || !email.contains("@gmail.com"))
+        if(email.isEmpty() || !email.contains("@diu.edu.bd"))
         {
             showError(inputEmail, "Email is not Valid");
         }else if(password.isEmpty() || password.length()<5)
@@ -82,10 +82,17 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         mLoadingBar.dismiss();
                         Toast.makeText(LoginActivity.this,"Login is succesful",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK| intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                        if(email.contains("admin@diu.edu.bd") && password.contains("123456")){
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+
+                        }
+
 
                     }else
                     {
