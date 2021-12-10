@@ -17,85 +17,85 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
-
-    private TextInputLayout inputEmail,inputPassword;
-    Button btnLogin;
-    TextView createNewAccount;
-    ProgressDialog mLoadingBar;
+public class RegisterActivity extends AppCompatActivity {
+    private TextInputLayout inputEmail,inputPassword,inputConfirmPassword;
+    Button btnRegister;
+    TextView alreadyHaveAccount;
     FirebaseAuth mAuth;
+    ProgressDialog mLoadingBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        createNewAccount = findViewById(R.id.createNewAccount);
-        mLoadingBar = new ProgressDialog(this);
+        inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        alreadyHaveAccount = findViewById(R.id.alreadyHaveAccount);
         mAuth = FirebaseAuth.getInstance();
+        mLoadingBar = new ProgressDialog(this);
 
-        createNewAccount.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                AtemptRegistration();
+            }
+        });
+
+        alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AttemptLogin();
-            }
-        });
-
     }
-
-
-
-
-
-
-    private void AttemptLogin() {
+    private void AtemptRegistration() {
         String email = inputEmail.getEditText().getText().toString();
         String password = inputPassword.getEditText().getText().toString();
+        String confirmPassword = inputConfirmPassword.getEditText().getText().toString();
 
-
-        if(email.isEmpty() || !email.contains("@gmail.com"))
+        if(email.isEmpty() || !email.contains("@diu.edu.bd"))
         {
             showError(inputEmail, "Email is not Valid");
         }else if(password.isEmpty() || password.length()<5)
         {
             showError(inputPassword, "Password must be greater than 5 letters");
 
+        }else if(!confirmPassword.equals(password))
+        {
+            showError(inputConfirmPassword, "Password did not match");;
         }else
         {
-            mLoadingBar.setTitle("Login");
+            mLoadingBar.setTitle("Registration");
             mLoadingBar.setMessage("Please wait");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+
                         mLoadingBar.dismiss();
-                        Toast.makeText(LoginActivity.this,"Login is succesful",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK| intent.FLAG_ACTIVITY_NEW_TASK);
+                        Toast.makeText(RegisterActivity.this,"Registration is succesful",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                       // intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK| intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
 
                     }else
                     {
                         mLoadingBar.dismiss();
-                        Toast.makeText(LoginActivity.this,"Login is Failed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,"Registration is Failed",Toast.LENGTH_SHORT).show();
                     }
 
                 }
             });
         }
+
 
     }
 
@@ -103,4 +103,5 @@ public class LoginActivity extends AppCompatActivity {
         field.setError(text);
         field.requestFocus();
     }
+
 }
